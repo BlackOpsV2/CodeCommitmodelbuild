@@ -119,6 +119,8 @@ def get_pipeline(
     model_package_group_name="IntelImageClassifierModelGroup",
     pipeline_name="PyTorchLightningKaggleIntelImageClassifier",
     base_job_prefix="IntelImage",
+    processing_instance_type="ml.m5.xlarge",
+    training_instance_type="ml.m5.xlarge",
 ):
     """Gets a SageMaker ML Pipeline instance working with on abalone data.
 
@@ -175,6 +177,8 @@ def get_pipeline(
             "GIT_EMAIL": "vivek.experiotech@gmail.com",
         },
     )
+    print("-------------", os.path.join(BASE_DIR, "module"))
+    print(os.listdir(os.path.join(BASE_DIR, "module"))
 
     processing_step_args = sklearn_processor.run(
         code="preprocess.py",
