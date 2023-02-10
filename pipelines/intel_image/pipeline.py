@@ -178,7 +178,7 @@ def get_pipeline(
         },
     )
     print("-------------", os.path.join(BASE_DIR, "module"))
-    print(os.listdir(os.path.join(BASE_DIR, "module"))
+    print(os.listdir(os.path.join(BASE_DIR, "module")))
 
     processing_step_args = sklearn_processor.run(
         code="preprocess.py",
