@@ -177,8 +177,6 @@ def get_pipeline(
             "GIT_EMAIL": "vivek.experiotech@gmail.com",
         },
     )
-    print("-------------", BASE_DIR)
-    print(os.listdir(BASE_DIR))
 
     processing_step_args = sklearn_processor.run(
         code="preprocess.py",
