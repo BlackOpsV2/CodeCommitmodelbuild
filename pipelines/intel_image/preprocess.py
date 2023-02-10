@@ -1,7 +1,3 @@
-import pyrootutils
-
-root = pyrootutils.setup_root(__file__, pythonpath=True)
-
 import argparse
 import os
 import subprocess
