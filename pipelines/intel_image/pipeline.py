@@ -177,12 +177,12 @@ def get_pipeline(
             "GIT_EMAIL": "vivek.experiotech@gmail.com",
         },
     )
-    print("-------------", os.path.join(BASE_DIR, "module"))
-    print(os.listdir(os.path.join(BASE_DIR, "module")))
+    print("-------------", BASE_DIR)
+    print(os.listdir(BASE_DIR))
 
     processing_step_args = sklearn_processor.run(
         code="preprocess.py",
-        source_dir=os.path.join(BASE_DIR, "module"),
+        source_dir=BASE_DIR,
         # dependencies="sagemaker-flower-pipeline/requirements.txt",
         inputs=[
             ProcessingInput(
@@ -218,7 +218,7 @@ def get_pipeline(
     pt_estimator = PyTorch(
         image_uri="294495367161.dkr.ecr.ap-south-1.amazonaws.com/sagemaker:latest",
         base_job_name=f"{base_job_name}/training_intel_image",
-        source_dir=os.path.join(BASE_DIR, "module"),
+        source_dir=BASE_DIR,
         entry_point="train.py",
         sagemaker_session=pipeline_session,
         role=role,
@@ -276,7 +276,7 @@ def get_pipeline(
 
     eval_step_args = pytorch_processor.run(
         code="eval.py",
-        source_dir=os.path.join(BASE_DIR, "module"),
+        source_dir=BASE_DIR,
         inputs=[
             ProcessingInput(
                 source=step_train.properties.ModelArtifacts.S3ModelArtifacts,
@@ -322,7 +322,7 @@ def get_pipeline(
 
     model = PyTorchModel(
         entry_point="infer.py",
-        source_dir=os.path.join(BASE_DIR, "module"),
+        source_dir=BASE_DIR,
         sagemaker_session=pipeline_session,
         role=role,
         model_data=step_train.properties.ModelArtifacts.S3ModelArtifacts,
